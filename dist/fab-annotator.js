@@ -1,12 +1,12 @@
 /**
  * @author:      Oshane Bailey
  * @package:     Fabric Image Annotator
- * @version:     v1.0.2
+ * @version:     v1.0.3
  */
 
 var min = 99;
 var max = 999999;
-var polygonMode = true;
+var polygonMode = false;
 var pointArray = new Array();
 var lineArray = new Array();
 var activeLine;
@@ -227,12 +227,12 @@ var annoFabric = new function (imageElement, options) {
             'id="fab-popover"' +
             'data-delay="1000"' +
             'data-content="<div class=\'fab-main-popover\'><div class=\'fab-popover-content\'></div><div class=\'fab-popover-buttons ' + toggleEdit + ' \'><button type=\'button\' class=\'btn btn-primary btn-sm icon-edit editCanvasObjectBtn canvasObjectBtn\' data-dismiss=\'modal\'>Edit</button><button type=\'button\' class=\'btn btn-danger icon-trash deleteCanvasObjectBtn btn-sm canvasObjectBtn\' data-dismiss=\'modal\'>Delete</button></div></div>">.</div>');
-        $("body").append(popoverHtnl);
+        $(".canvas-container").append(popoverHtnl);
 
-        $(window).on("resize", function () {
-            console.log("resize canvas");
-            _this.scaleCanvas();
-        });
+//        $(window).on("resize", function () {
+//            console.log("resize canvas");
+//            _this.scaleCanvas();
+//        });
 
         _this.canvas.on('object:selected', function (e) {
             console.log(e.target.oCoords);
