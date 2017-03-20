@@ -1,3 +1,9 @@
+/**
+ * @author:      Oshane Bailey
+ * @package:     Fabric Image Annotator
+ * @version:     v1.0.2
+ */
+
 var min = 99;
 var max = 999999;
 var polygonMode = true;
@@ -5,12 +11,6 @@ var pointArray = new Array();
 var lineArray = new Array();
 var activeLine;
 var activeShape = false;
-var canvas;
-$(document).ready(function () {
-    annoFabric.initCanvas(null, {
-        annotationTextField: "<select name='annotation-text-field'><option value='oshane'>Oshane</option><option value='nicole'>Nicole</option></select>"
-    });
-});
 var annoFabric = new function (imageElement, options) {
 
     var _this = this;
@@ -28,18 +28,18 @@ var annoFabric = new function (imageElement, options) {
         });
     };
 
-    this.loadFromLocalStorage = function(key){
-        if(key == undefined){
+    this.loadFromLocalStorage = function (key) {
+        if (key == undefined) {
             key = "anno-canvas";
         }
         var json = localStorage.getItem(key);
-        if(json != undefined){
+        if (json != undefined) {
             this.loadFromJSON(JSON.parse(json));
         }
     }
 
-    this.saveToLocalStorage = function(key){
-        if(key == undefined){
+    this.saveToLocalStorage = function (key) {
+        if (key == undefined) {
             key = "anno-canvas";
         }
         localStorage.setItem(key, JSON.stringify(this.canvas.toJSON()));
@@ -139,7 +139,7 @@ var annoFabric = new function (imageElement, options) {
         if (imageElement == undefined || imageElement == null) {
             this.$image = $(".fab-annotate");
         } else {
-            this.$iamge = $(imageElement);
+            this.$image = $(imageElement);
         }
         var canvasEl = '<div class="fab-canvas">' +
             '<canvas id="c' + this.cid + '"></canvas>' +
@@ -159,19 +159,40 @@ var annoFabric = new function (imageElement, options) {
         this.$image.addClass("fab-hide");
         vimage = this.$image;
 
+        var canvasHeight = this.$image[0].naturalHeight;
+        var canvasWidth = this.$image[0].naturalWidth;
+        if (this.options.canvasHeight != undefined) {
+            canvasHeight = this.options.canvasHeight;
+        }
+        if (this.options.canvasWidth != undefined) {
+            canvasWidth = this.options.canvasWidth;
+        }
+
         //canvas.selection = false;
         console.log("Set canvas to: " + this.$image[0].naturalWidth + " by " + this.$image[0].naturalHeight);
         _this.canvas = window._canvas = new fabric.Canvas(
             'c' + this.cid, {
-                width: this.$image[0].naturalWidth,
-                height: this.$image[0].naturalHeight
+                width: canvasWidth,
+                height: canvasHeight
             });
 
         _this.canvas.setBackgroundImage(this.$image.attr("src"));
         _this.canvas.renderAll();
+        setTimeout(function () {
+            resizeCanvasBackground = setInterval(function(){
+                try{
+                    _this.canvas.backgroundImage.setWidth(canvasWidth);
+                    _this.canvas.backgroundImage.setHeight(canvasHeight);
+                    _this.canvas.renderAll();
+                    clearTimeout(resizeCanvasBackground);
+                }catch(e){
+                    console.log("Resetting image size");
+                }
+            }, 1000);
+        }, 1000);
 
         var inputField = '<input class="form-control" placeholder="Enter Annotation" type="text" id="annotation-text-field" name="annotation-text-field" />';
-        if (this.options.annontationTextField != undefined) {
+        if (this.options.annotationTextField != undefined) {
             inputField = this.options.annotationTextField;
         }
 
@@ -217,7 +238,7 @@ var annoFabric = new function (imageElement, options) {
             console.log(e.target.oCoords);
             _this.movePopover(
                 e.target.oCoords.tr.x - (e.target.width / 2),
-                e.target.oCoords.tr.y + e.target.height
+                e.target.oCoords.tr.y + (e.target.height )
             );
             $("#fab-popover").popover("show");
             var ctext = e.target.item(1);
@@ -227,7 +248,7 @@ var annoFabric = new function (imageElement, options) {
         _this.canvas.on('object:modified', function (e) {
             _this.movePopover(
                 e.target.oCoords.tr.x - (e.target.width / 2),
-                e.target.oCoords.tr.y + e.target.height
+                e.target.oCoords.tr.y + (e.target.height )
             );
         });
 
@@ -268,7 +289,7 @@ var annoFabric = new function (imageElement, options) {
                 ctext.visible = false;
                 _this.movePopover(
                     e.target.oCoords.tr.x - (e.target.width / 2),
-                    e.target.oCoords.tr.y + e.target.height
+                    e.target.oCoords.tr.y + (e.target.height )
                 );
                 $("#fab-popover").popover("show");
                 $(".fab-popover-content").html(ctext.getText());

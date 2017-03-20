@@ -23,6 +23,13 @@
     <script type="text/ecmascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../bower_components/fabric.js/dist/fabric.min.js"></script>
     <script type="text/javascript" src="../dist/fab-annotator.js"></script>
+    <script>
+        $(document).ready(function () {
+            annoFabric.initCanvas(null, {
+                annotationTextField: "<select class='form-control' name='annotation-text-field'><option value='oshane'>Oshane</option><option value='nicole'>Nicole</option></select>"
+            });
+        });
+    </script>
 
 </body>
 

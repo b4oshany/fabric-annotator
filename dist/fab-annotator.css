@@ -6,7 +6,7 @@ img.fab-hide{
 
 .fab-annotate-btn {
     position: absolute;
-    width: 200px;
+    width: 250px;
     background: rgba(0,0,0,.3);
     padding: 5px 10px;
     left: 10px;
@@ -15,9 +15,6 @@ img.fab-hide{
     color: white;
     font-weight: bold;
     border-radius: 20px;
-}
-
-dic.fab-canvas {
 }
 
 #fab-popover{
@@ -33,3 +30,14 @@ dic.fab-canvas {
 .icon-trash.deleteCanvasObjectBtn.canvasObjectBtn {
     margin-left: 10px;
 }
+
+.fab-canvas {
+    display: inline-block;
+    position: relative;
+}
+
+.popover[role="tooltip"]{
+    visibility: visible !important;
+    min-width: 200px;
+}
+
