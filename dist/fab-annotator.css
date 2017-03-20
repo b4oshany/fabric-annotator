@@ -1,0 +1,35 @@
+
+
+img.fab-hide{
+    display: none !important;
+}
+
+.fab-annotate-btn {
+    position: absolute;
+    width: 200px;
+    background: rgba(0,0,0,.3);
+    padding: 5px 10px;
+    left: 10px;
+    top: 10px;
+    z-index: 10000000;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+dic.fab-canvas {
+}
+
+#fab-popover{
+    position: absolute;
+}
+
+.fab-popover-buttons{
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px solid #ccc;
+}
+
+.icon-trash.deleteCanvasObjectBtn.canvasObjectBtn {
+    margin-left: 10px;
+}

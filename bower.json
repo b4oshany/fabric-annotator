@@ -1,0 +1,32 @@
+{
+  "name": "fabric-annotator",
+  "authors": [
+    "Oshane Bailey <b4.oshany@gmail.com>"
+  ],
+  "description": "Annotate images on camvas using Fabric.js",
+  "main": [
+    "dist/fab-annotator.css",
+    "dist/fab-annotator.js"
+  ],
+  "keywords": [
+    "fabric",
+    "fabricjs",
+    "annotation",
+    "annotate",
+    "image"
+  ],
+  "license": "MIT",
+  "homepage": "http://osoobe.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "demos"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "fabric.js": "fabric#^1.7.8"
+  }
+}
